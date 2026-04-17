@@ -1,0 +1,14 @@
+.git
+.gitignore
+.env
+.env.*
+.DS_Store
+node_modules
+.idea
+.vscode
+*.log
+storage/logs
+storage/cache
+.phpunit.result.cache
+composer.lock
+package-lock.json

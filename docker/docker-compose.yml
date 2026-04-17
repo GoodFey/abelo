@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: abelo-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    environment:
+      - APP_ENV=docker
+      - APP_DEBUG=true
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=abelo
+      - DB_USER=abelo_user
+      - DB_PASSWORD=password
+    volumes:
+      - ..:/var/www/html
+    networks:
+      - abelo-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.0-alpine
+    container_name: abelo-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: abelo
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_PASSWORD: password
+      MYSQL_USER: abelo_user
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - abelo-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  nginx:
+    image: nginx:alpine
+    container_name: abelo-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ..:/var/www/html
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    networks:
+      - abelo-network
+    depends_on:
+      - app
+
+volumes:
+  mysql_data:
+
+networks:
+  abelo-network:
+    driver: bridge

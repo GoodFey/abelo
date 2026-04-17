@@ -1,0 +1,48 @@
+# Composer dependencies
+vendor/
+composer.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+.env.local
+
+# Environment
+.env
+.env.*.local
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Cache
+storage/cache/*
+!storage/cache/.gitkeep
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+
+# Node modules (if used)
+node_modules/
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# Database
+*.sqlite
+*.sqlite3
+database/*.db
+
+# Tests
+tests/coverage/
+.phpunit.result.cache
