@@ -56,7 +56,7 @@ class PostController extends Controller
             'sortIndicator' => [
                 'title' => $sorter->getSortIndicator('title'),
                 'published_at' => $sorter->getSortIndicator('published_at'),
-                'created_at' => $sorter->getSortIndicator('created_at'),
+                'views' => $sorter->getSortIndicator('views'),
             ],
         ]);
     }
@@ -88,8 +88,8 @@ class PostController extends Controller
             return 'Post is not published';
         }
 
-        // Increment views counter
-        $post->incrementViews();
+        // Increment views counter with lock to prevent race condition
+        $post->incrementViewsWithLock();
 
         // Get categories for this post
         $categories = $post->getCategories();

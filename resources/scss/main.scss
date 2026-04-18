@@ -759,7 +759,238 @@ button, .btn {
     }
 }
 
-// ===== Responsive =====
+// ===== Posts Page Specific Styles =====
+
+// Posts Description
+.posts-description {
+    color: var(--text-light);
+    margin-bottom: 2rem;
+}
+
+// Sort Controls Block
+.sort-controls-block {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #f8fafc;
+    border-radius: 0.5rem;
+
+    strong {
+        font-weight: 600;
+    }
+
+    .sort-btn {
+        margin-left: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: #64748b;
+
+        &.active {
+            background-color: #3b82f6;
+        }
+
+        &:hover {
+            background-color: #3b82f6;
+        }
+    }
+}
+
+// Page Info
+.posts-page-info {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
+// Empty State for Posts
+.posts-empty-state {
+    background-color: #fff3cd;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+
+    p {
+        margin-bottom: 1rem;
+    }
+}
+
+// ===== Post Show Page Styles =====
+
+// Full-width Post Image
+.post-image-full-width {
+    margin: 2rem -1rem;
+    overflow: hidden;
+    border-radius: 0;
+
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+}
+
+// Post Meta Section (Show Page)
+.post-meta-show {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+
+    span {
+        margin-right: 1.5rem;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+// Post Categories on Show Page
+.post-categories-show {
+    margin-bottom: 2rem;
+
+    strong {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+}
+
+// Post Navigation
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+
+    .btn {
+        background-color: #64748b;
+
+        &:hover {
+            background-color: var(--primary);
+        }
+    }
+}
+
+// Similar Posts Section
+.similar-posts-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    .section-description {
+        color: var(--text-light);
+        margin-bottom: 1.5rem;
+    }
+
+    .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+
+        .post-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+
+            h3 {
+                flex-grow: 1;
+            }
+
+            .btn {
+                margin-top: 1rem;
+            }
+        }
+    }
+}
+
+// Recommended Posts Section
+.recommended-posts-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    .section-description {
+        color: var(--text-light);
+        margin-bottom: 1.5rem;
+    }
+
+    .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+
+        .post-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border-left: 3px solid var(--accent);
+
+            h3 {
+                flex-grow: 1;
+            }
+
+            .btn {
+                margin-top: 1rem;
+            }
+        }
+    }
+}
+
+// ===== Responsive Posts Styles =====
+
+@media (max-width: 768px) {
+    .post-image-full-width {
+        margin: 1.5rem -1rem;
+    }
+
+    .sort-controls-block {
+        padding: 0.75rem;
+
+        .sort-btn {
+            margin-left: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+        }
+    }
+
+    .post-navigation {
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+
+        > div {
+            width: 100%;
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+
+    .similar-posts-section,
+    .recommended-posts-section {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+
+        .posts-grid {
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+    }
+}
+
+// ===== Category Page Responsive =====
 
 @media (max-width: 1024px) {
     .posts-grid-horizontal {

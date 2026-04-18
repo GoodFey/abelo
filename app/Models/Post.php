@@ -222,6 +222,8 @@ class Post extends Model
 
     /**
      * Increment views counter
+     * 
+     * @deprecated Use incrementViewsWithLock() instead to prevent race conditions
      */
     public function incrementViews(): bool
     {
@@ -233,6 +235,46 @@ class Post extends Model
             "UPDATE {$this->table} SET views = views + 1 WHERE id = ?",
             [$this->id]
         );
+    }
+
+    /**
+     * Increment views counter with row-level lock (prevents race condition)
+     * Uses SELECT ... FOR UPDATE to lock the row during transaction
+     */
+    public function incrementViewsWithLock(): bool
+    {
+        if (!isset($this->id)) {
+            return false;
+        }
+
+        try {
+            // Start transaction
+            $this->db->beginTransaction();
+
+            // Lock the row for update
+            $query = "SELECT views FROM {$this->table} WHERE id = ? FOR UPDATE";
+            $this->db->fetchOne($query, [$this->id]);
+
+            // Increment views
+            $updated = $this->db->execute(
+                "UPDATE {$this->table} SET views = views + 1 WHERE id = ?",
+                [$this->id]
+            );
+
+            // Commit transaction
+            $this->db->commit();
+
+            return $updated;
+        } catch (\Exception $e) {
+            // Rollback on error
+            try {
+                $this->db->rollback();
+            } catch (\Exception) {
+                // Ignore rollback error
+            }
+
+            return false;
+        }
     }
 
     /**
