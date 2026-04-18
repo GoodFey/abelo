@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
-use Smarty\Smarty;
+use Smarty;
 
 /**
  * Main Application class

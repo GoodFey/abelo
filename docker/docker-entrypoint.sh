@@ -27,6 +27,8 @@ else
 fi
 echo ""
 
+git config --global --add safe.directory /var/www/html
+
 # Composer
 if [ ! -d "vendor" ]; then
     echo "📦 Installing PHP dependencies..."

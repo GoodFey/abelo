@@ -6,8 +6,6 @@ declare(strict_types=1);
  * Smarty Template Engine Configuration
  */
 
-use Smarty\Smarty;
-
 return function(): Smarty {
     $smarty = new Smarty();
 

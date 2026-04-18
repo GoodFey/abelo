@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-use Smarty\Smarty;
+use Smarty;
 
 /**
  * View class - wrapper for Smarty template engine
