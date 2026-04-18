@@ -39,7 +39,7 @@ class HomeController extends Controller
         $totalPosts = $postModel->count();
         $totalCategories = $categoryModel->count();
 
-        return $this->render('home', [
+        return $this->render('home.tpl', [
             'title' => 'Abelo - Блог о веб-разработке',
             'description' => 'Статьи о PHP, JavaScript, веб-дизайне и DevOps',
             'posts' => $posts,
@@ -55,7 +55,7 @@ class HomeController extends Controller
      */
     public function about(Request $request, Response $response, array $params = []): string
     {
-        return $this->render('about', [
+        return $this->render('about.tpl', [
             'title' => 'О блоге',
             'description' => 'Информация о проекте Abelo'
         ]);

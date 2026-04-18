@@ -386,7 +386,7 @@
     </header>
 
     <main class="container">
-        {$content}
+        {block name="content"}{/block}
     </main>
 
     <footer>

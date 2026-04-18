@@ -23,7 +23,7 @@ class CategoryController extends Controller
         $categoryModel = new Category();
         $categories = $categoryModel->getAll();
 
-        return $this->render('categories/index', [
+        return $this->render('categories/index.tpl', [
             'title' => 'Все категории',
             'description' => 'Список всех категорий блога',
             'categories' => $categories,
@@ -55,7 +55,7 @@ class CategoryController extends Controller
         // Get posts in this category
         $posts = $postModel->getByCategory($category->id);
 
-        return $this->render('categories/show', [
+        return $this->render('categories/show.tpl', [
             'title' => 'Категория: ' . $category->name,
             'description' => $category->description,
             'category' => $category,
@@ -69,7 +69,7 @@ class CategoryController extends Controller
     public function create(Request $request, Response $response, array $params = []): string
     {
         if ($request->getMethod() === 'GET') {
-            return $this->render('categories/create', [
+            return $this->render('categories/create.tpl', [
                 'title' => 'Создать категорию',
             ]);
         }

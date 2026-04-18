@@ -42,7 +42,7 @@ class PostController extends Controller
         // Create paginator
         $paginator = new Paginator($sortedPosts, $perPage, $page);
 
-        return $this->render('posts/index', [
+        return $this->render('posts/index.tpl', [
             'title' => 'Все статьи',
             'description' => 'Полный список опубликованных статей',
             'posts' => $paginator->getItems(),
@@ -98,7 +98,7 @@ class PostController extends Controller
         $similarPosts = $post->getSimilar(3);
         $recommendedPosts = $post->getRecommended(5);
 
-        return $this->render('posts/show', [
+        return $this->render('posts/show.tpl', [
             'title' => $post->title,
             'description' => $post->excerpt,
             'post' => $post,
@@ -117,7 +117,7 @@ class PostController extends Controller
             $categoryModel = new Category();
             $categories = $categoryModel->getAll();
 
-            return $this->render('posts/create', [
+            return $this->render('posts/create.tpl', [
                 'title' => 'Создать статью',
                 'categories' => $categories,
             ]);
