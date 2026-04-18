@@ -21,6 +21,14 @@ if (file_exists(BASE_PATH . '/.env')) {
 
 use App\Core\Router;
 use App\Core\Response;
+use App\Core\Database;
+
+// Initialize Database connection
+Database::initialize(
+    "mysql:host=" . ($_ENV['DB_HOST'] ?? 'localhost') . ":" . ($_ENV['DB_PORT'] ?? 3306) . ";dbname=" . ($_ENV['DB_NAME'] ?? 'abelo'),
+    $_ENV['DB_USER'] ?? 'root',
+    $_ENV['DB_PASSWORD'] ?? ''
+);
 
 // Create router instance
 $router = new Router();

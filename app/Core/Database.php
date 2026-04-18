@@ -190,7 +190,7 @@ class Database
 
         $query = "INSERT INTO {$table} (" . implode(',', $quotedColumns) . ") VALUES (" . implode(',', $placeholders) . ")";
 
-        $stmt = $this->prepare($query);
+        $stmt = $this->pdo->prepare($query);
         $stmt->execute(array_values($data));
 
         return (int) $this->pdo->lastInsertId();
@@ -217,7 +217,7 @@ class Database
 
         $query = "UPDATE {$table} SET " . implode(', ', $set) . " WHERE " . implode(' AND ', $whereClause);
 
-        $stmt = $this->prepare($query);
+        $stmt = $this->pdo->prepare($query);
         $stmt->execute($values);
 
         return $stmt->rowCount();
@@ -238,7 +238,7 @@ class Database
 
         $query = "DELETE FROM {$table} WHERE " . implode(' AND ', $whereClause);
 
-        $stmt = $this->prepare($query);
+        $stmt = $this->pdo->prepare($query);
         $stmt->execute($values);
 
         return $stmt->rowCount();

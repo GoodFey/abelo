@@ -1,0 +1,74 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Artisan Command Line Tool
+ * Usage: php bin/artisan <command> [arguments]
+ */
+
+define('BASE_PATH', dirname(__DIR__));
+
+// Load autoloader
+require BASE_PATH . '/vendor/autoload.php';
+
+// Load environment variables
+if (file_exists(BASE_PATH . '/.env')) {
+    $env = file_get_contents(BASE_PATH . '/.env');
+    foreach (explode("\n", $env) as $line) {
+        $line = trim($line);
+        if ($line && !str_starts_with($line, '#')) {
+            if (str_contains($line, '=')) {
+                [$key, $value] = explode('=', $line, 2);
+                $_ENV[trim($key)] = trim($value);
+            }
+        }
+    }
+}
+
+use App\Core\Database;
+use App\Commands\MigrateCommand;
+use App\Commands\SeedCommand;
+
+// Initialize database
+try {
+    Database::initialize(
+        "mysql:host=" . ($_ENV['DB_HOST'] ?? 'localhost') . ":" . ($_ENV['DB_PORT'] ?? 3306) . ";dbname=" . ($_ENV['DB_NAME'] ?? 'abelo'),
+        $_ENV['DB_USER'] ?? 'root',
+        $_ENV['DB_PASSWORD'] ?? ''
+    );
+} catch (Exception $e) {
+    echo "❌ Database connection failed: " . $e->getMessage() . "\n";
+    exit(1);
+}
+
+// Available commands
+$commands = [
+    'migrate' => MigrateCommand::class,
+    'seed' => SeedCommand::class,
+];
+
+$command = $argv[1] ?? 'help';
+$arguments = array_slice($argv, 2);
+
+if ($command === 'help' || $command === '--help' || $command === '-h') {
+    echo "🎯 Abelo CLI Tool\n\n";
+    echo "Available commands:\n";
+    echo "  migrate           Run pending migrations\n";
+    echo "  seed              Run database seeders\n";
+    echo "  help              Show this help message\n";
+    exit(0);
+}
+
+if (!isset($commands[$command])) {
+    echo "❌ Unknown command: {$command}\n";
+    echo "Run 'php bin/artisan help' for available commands\n";
+    exit(1);
+}
+
+// Run command
+$commandClass = $commands[$command];
+$commandInstance = new $commandClass($arguments);
+exit($commandInstance->handle());
+

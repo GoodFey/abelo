@@ -84,7 +84,7 @@ docker compose exec app sh
 
 docker_exec_mysql() {
 docker_cd
-docker compose exec mysql sh -c 'mysql -u root -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"'
+docker compose exec -T app mysql -h mysql -u abelo_user -ppassword abelo --ssl-mode=DISABLED
 }
 
 docker_composer() {
@@ -101,6 +101,36 @@ docker_permissions() {
 docker_cd
 docker compose exec app chown -R www-data storage bootstrap/cache
 docker compose exec app chmod -R 775 storage bootstrap/cache
+}
+
+docker_migrate() {
+echo -e "${BLUE}Running migrations...${NC}"
+docker_cd
+docker compose exec -T app php /var/www/html/bin/artisan migrate
+echo -e "${GREEN}✅ Migrations completed${NC}"
+}
+
+docker_seed() {
+echo -e "${BLUE}Running seeders...${NC}"
+docker_cd
+docker compose exec -T app php /var/www/html/bin/artisan seed
+echo -e "${GREEN}✅ Seeders completed${NC}"
+}
+
+docker_migrate_seed() {
+echo -e "${BLUE}Running migrations and seeders...${NC}"
+docker_migrate
+docker_seed
+echo -e "${GREEN}✅ Database setup completed${NC}"
+}
+
+docker_migrate_fresh_seed() {
+echo -e "${YELLOW}Running migrate:fresh --seed...${NC}"
+docker_cd
+echo -e "${BLUE}Running migrations with --fresh...${NC}"
+docker compose exec -T app php bin/artisan migrate --fresh
+docker_seed
+echo -e "${GREEN}✅ Database refreshed and seeded${NC}"
 }
 
 docker_clean() {
@@ -127,9 +157,10 @@ exec-app) docker_exec_app ;;
 exec-mysql) docker_exec_mysql ;;
 composer) shift; docker_composer "$@" ;;
 npm) shift; docker_npm "$@" ;;
-db-migrate) docker_migrate ;;
-db-fresh) docker_fresh ;;
-clear) docker_clear ;;
+migrate) docker_migrate ;;
+seed) docker_seed ;;
+migrate-seed|--seed) docker_migrate_seed ;;
+migrate-fresh-seed|migrate-fresh|fresh-seed) docker_migrate_fresh_seed ;;
 permissions) docker_permissions ;;
 clean) docker_clean ;;
 *) echo "Unknown command"; exit 1 ;;
