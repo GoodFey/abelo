@@ -27,4 +27,6 @@ return function (Router $router) {
     $router->post('/categories', 'CategoryController@create');
     $router->post('/categories/{id}', 'CategoryController@update');
     $router->post('/categories/{id}/delete', 'CategoryController@delete');
+
+    $router->get('/test', 'TestController@index');
 };
