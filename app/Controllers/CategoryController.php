@@ -7,6 +7,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\Request;
 use App\Core\Response;
+use App\Core\Paginator;
 use App\Models\Category;
 use App\Models\Post;
 
@@ -21,12 +22,18 @@ class CategoryController extends Controller
     public function index(Request $request, Response $response, array $params = []): string
     {
         $categoryModel = new Category();
-        $categories = $categoryModel->getAll();
+        $postModel = new Post();
+
+        $categories = $categoryModel->getWithPosts();
+
+        // Get popular posts
+        $popularPosts = $postModel->getMostViewed(5);
 
         return $this->render('categories/index.tpl', [
             'title' => 'Все категории',
             'description' => 'Список всех категорий блога',
             'categories' => $categories,
+            'popularPosts' => $popularPosts,
         ]);
     }
 
@@ -52,14 +59,27 @@ class CategoryController extends Controller
             return 'Category not found';
         }
 
-        // Get posts in this category
-        $posts = $postModel->getByCategory($category->id);
+        // Get page parameter for pagination
+        $page = (int)($request->query('page', 1));
+        $perPage = 3;
+
+        // Get posts in this category (published only)
+        $allPosts = $postModel->getByCategory($category->id);
+        $published = array_filter($allPosts, fn($p) => $p->is_published);
+
+        // Create paginator
+        $paginator = new Paginator($published, $perPage, $page);
 
         return $this->render('categories/show.tpl', [
             'title' => 'Категория: ' . $category->name,
             'description' => $category->description,
             'category' => $category,
-            'posts' => $posts,
+            'posts' => $paginator->getItems(),
+            'pagination' => $paginator->toArray(),
+            'currentPage' => $paginator->getCurrentPage(),
+            'totalPages' => $paginator->getTotalPages(),
+            'total' => $paginator->getTotal(),
+            'pageNumbers' => $paginator->getPageNumbers(),
         ]);
     }
 
