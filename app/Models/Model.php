@@ -21,10 +21,10 @@ abstract class Model
         // Инициализируем БД если нужно
         if (Database::getInstance() === null) {
             Database::initialize(
-                $_ENV['DB_HOST'] ?? 'localhost',
-                $_ENV['DB_NAME'] ?? 'abelo',
+                '',  // DSN будет построен из .env
                 $_ENV['DB_USER'] ?? 'root',
-                $_ENV['DB_PASSWORD'] ?? ''
+                $_ENV['DB_PASSWORD'] ?? '',
+                []   // опции PDO по умолчанию
             );
         }
         $this->db = Database::getInstance();

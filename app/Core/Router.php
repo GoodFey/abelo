@@ -79,13 +79,21 @@ class Router
 
     /**
      * Convert path with parameters to regex pattern
-     * Example: /users/{id} -> /users/(\d+)
+     * Example: /users/{id} -> /users/(\d+), /posts/{slug} -> /posts/([a-z0-9-]+)
      */
     private function pathToRegex(string $path): string
     {
-        $pattern = preg_replace(
+        $pattern = preg_replace_callback(
             '/{(\w+)}/',
-            '(?P<$1>[^/]+)',
+            function ($matches) {
+                $name = $matches[1];
+                // Если параметр - это ID (id, post_id, category_id, etc.) - только цифры
+                if (preg_match('/(id|_id)$/', $name)) {
+                    return "(?P<$name>\\d+)";
+                }
+                // slug и другие текстовые параметры - буквы, цифры, дефисы
+                return "(?P<$name>[a-z0-9-]+)";
+            },
             $path
         );
         return '^' . $pattern . '$';
@@ -134,6 +142,17 @@ class Router
         if (is_string($handler)) {
             [$controllerClass, $method] = explode('@', $handler);
             $controllerClass = 'App\\Controllers\\' . $controllerClass;
+            
+            if (!class_exists($controllerClass)) {
+                $response->setStatus(500)->setBody('Controller not found');
+                return $response;
+            }
+            
+            if (!method_exists($controllerClass, $method)) {
+                $response->setStatus(500)->setBody('Method not found');
+                return $response;
+            }
+            
             $controller = new $controllerClass();
             $result = $controller->{$method}($request, $response, $params);
 
