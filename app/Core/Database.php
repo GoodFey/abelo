@@ -125,9 +125,16 @@ class Database
      */
     public function query(string $query, array $params = [])
     {
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute($params);
-        return $stmt;
+        try {
+            $stmt = $this->pdo->prepare($query);
+            if (!$stmt->execute($params)) {
+                throw new PDOException('Query execution failed');
+            }
+            return $stmt;
+        } catch (PDOException $e) {
+            error_log('Database Query Error: ' . $e->getMessage() . ' | Query: ' . $query);
+            throw new PDOException('Query execution failed: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -164,9 +171,10 @@ class Database
     public function insert(string $table, array $data): int
     {
         $columns = array_keys($data);
+        $quotedColumns = array_map(fn($col) => "`{$col}`", $columns);
         $placeholders = array_fill(0, count($columns), '?');
 
-        $query = "INSERT INTO {$table} (" . implode(',', $columns) . ") VALUES (" . implode(',', $placeholders) . ")";
+        $query = "INSERT INTO {$table} (" . implode(',', $quotedColumns) . ") VALUES (" . implode(',', $placeholders) . ")";
 
         $stmt = $this->prepare($query);
         $stmt->execute(array_values($data));
@@ -183,13 +191,13 @@ class Database
         $values = [];
 
         foreach ($data as $column => $value) {
-            $set[] = "{$column} = ?";
+            $set[] = "`{$column}` = ?";
             $values[] = $value;
         }
 
         $whereClause = [];
         foreach ($where as $column => $value) {
-            $whereClause[] = "{$column} = ?";
+            $whereClause[] = "`{$column}` = ?";
             $values[] = $value;
         }
 
@@ -210,7 +218,7 @@ class Database
         $values = [];
 
         foreach ($where as $column => $value) {
-            $whereClause[] = "{$column} = ?";
+            $whereClause[] = "`{$column}` = ?";
             $values[] = $value;
         }
 
