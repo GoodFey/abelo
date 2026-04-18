@@ -60,9 +60,30 @@ abstract class Model
     protected function hydrate(array $data): static
     {
         foreach ($data as $key => $value) {
-            if (property_exists($this, $key)) {
-                $this->$key = $value;
+            if (!is_string($key) || !property_exists($this, $key)) {
+                continue;
             }
+
+            // Get the type from reflection to cast properly
+            $reflection = new \ReflectionClass($this);
+            $property = $reflection->getProperty($key);
+            $type = $property->getType();
+
+            if ($type !== null) {
+                $typeName = $type->getName();
+                
+                if ($typeName === 'bool' && $value !== null) {
+                    $value = (bool) $value;
+                } elseif ($typeName === 'int' && $value !== null) {
+                    $value = (int) $value;
+                } elseif ($typeName === 'string' && $value !== null) {
+                    $value = (string) $value;
+                } elseif ($typeName === 'float' && $value !== null) {
+                    $value = (float) $value;
+                }
+            }
+
+            $this->$key = $value;
         }
         return $this;
     }

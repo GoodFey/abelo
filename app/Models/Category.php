@@ -18,6 +18,7 @@ class Category extends Model
     public ?string $description = null;
     public ?string $created_at = null;
     public ?string $updated_at = null;
+    public int $posts_count = 0;
 
     /**
      * Get all categories
@@ -31,6 +32,31 @@ class Category extends Model
         foreach ($rows as $row) {
             $category = new static();
             $categories[] = $category->hydrate($row);
+        }
+
+        return $categories;
+    }
+
+    /**
+     * Get categories that have at least one published post
+     */
+    public function getWithPosts(): array
+    {
+        $query = "SELECT c.*, COUNT(p.id) as posts_count FROM {$this->table} c
+                  INNER JOIN post_category pc ON c.id = pc.category_id
+                  INNER JOIN posts p ON p.id = pc.post_id
+                  WHERE p.is_published = 1
+                  GROUP BY c.id
+                  ORDER BY c.name ASC";
+
+        $rows = $this->db->fetchAll($query);
+
+        $categories = [];
+        foreach ($rows as $row) {
+            $category = new static();
+            $category = $category->hydrate($row);
+            $category->posts_count = (int)$row['posts_count'];
+            $categories[] = $category;
         }
 
         return $categories;

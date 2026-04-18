@@ -167,7 +167,7 @@ class Database
     public function fetchAll(string $query, array $params = []): array
     {
         $stmt = $this->query($query, $params);
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**

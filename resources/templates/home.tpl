@@ -3,23 +3,32 @@
 {block name="content"}
 
 <h1>Добро пожаловать в Abelo</h1>
-<p>Блог о веб-разработке, PHP, JavaScript, и DevOps</p>
 
-{* Statistics Section *}
-<div class="stats">
-    <div class="stat-card">
-        <div class="number">{$totalPosts|default:0}</div>
-        <div class="label">Статей</div>
-    </div>
-    <div class="stat-card">
-        <div class="number">{$totalCategories|default:0}</div>
-        <div class="label">Категорий</div>
-    </div>
-    <div class="stat-card">
-        <div class="number">{count($posts)|default:0}</div>
-        <div class="label">Последних постов</div>
-    </div>
-</div>
+{* Featured Section *}
+<section class="featured-section">
+    <h2>О проекте</h2>
+    <p>Abelo — это современный блог о веб-разработке, где мы делимся практическими советами, туториалами и статьями о PHP, JavaScript, веб-дизайне и DevOps.</p>
+    <p>Присоединяйтесь к нашему сообществу разработчиков и будьте в курсе последних тенденций в веб-индустрии!</p>
+</section>
+
+{* Categories Section *}
+<section class="categories-section">
+    <h2>Категории</h2>
+
+    {if !empty($categories)}
+        <div class="grid">
+            {foreach $categories as $category}
+                <a href="/categories/{$category->slug}" class="category-card">
+                    <h3>{$category->name}</h3>
+                    <p>{if $category->description}{$category->description}{else}Статьи о {$category->name}{/if}</p>
+                    <div class="category-count">{$category->posts_count} {if $category->posts_count == 1}статья{elseif $category->posts_count % 10 < 5 && $category->posts_count % 10 != 0}статьи{else}статей{/if}</div>
+                </a>
+            {/foreach}
+        </div>
+    {else}
+        <p>Категории не найдены.</p>
+    {/if}
+</section>
 
 {* Latest Posts Section *}
 <section>
@@ -79,31 +88,6 @@
         </div>
     </section>
 {/if}
-
-{* Categories Section *}
-<section class="categories-section">
-    <h2>Категории</h2>
-
-    {if count($categories) > 0}
-        <div class="grid">
-            {foreach $categories as $category}
-                <a href="/categories/{$category->slug}" class="category-card">
-                    <h3>{$category->name}</h3>
-                    <p>{if $category->description}{$category->description}{else}Статьи о {$category->name}{/if}</p>
-                </a>
-            {/foreach}
-        </div>
-    {else}
-        <p>Категории не найдены.</p>
-    {/if}
-</section>
-
-{* Featured Section *}
-<section class="featured-section">
-    <h2>О проекте</h2>
-    <p>Abelo — это современный блог о веб-разработке, где мы делимся практическими советами, туториалами и статьями о PHP, JavaScript, веб-дизайне и DevOps.</p>
-    <p>Присоединяйтесь к нашему сообществу разработчиков и будьте в курсе последних тенденций в веб-индустрии!</p>
-</section>
 
 {/block}
 

@@ -26,18 +26,14 @@ class HomeController extends Controller
         // Get latest published posts
         $latestPosts = $postModel->getPublished();
 
-        // Get first 5 posts for homepage
-        $posts = array_slice($latestPosts, 0, 5);
+        // Get first 3 posts for homepage
+        $posts = array_slice($latestPosts, 0, 3);
 
         // Get most viewed/popular posts
         $popularPosts = $postModel->getMostViewed(5);
 
-        // Get categories
-        $categories = $categoryModel->getAll();
-
-        // Get statistics
-        $totalPosts = $postModel->count();
-        $totalCategories = $categoryModel->count();
+        // Get categories that have posts
+        $categories = $categoryModel->getWithPosts();
 
         return $this->render('home.tpl', [
             'title' => 'Abelo - Блог о веб-разработке',
@@ -45,8 +41,6 @@ class HomeController extends Controller
             'posts' => $posts,
             'popularPosts' => $popularPosts,
             'categories' => $categories,
-            'totalPosts' => $totalPosts,
-            'totalCategories' => $totalCategories,
         ]);
     }
 
