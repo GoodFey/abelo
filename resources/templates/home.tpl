@@ -1,4 +1,6 @@
-{* Home Page Template *}
+{extends "layout.tpl"}
+
+{block name="content"}
 
 <h1>Добро пожаловать в Abelo</h1>
 <p>Блог о веб-разработке, PHP, JavaScript, и DevOps</p>
@@ -43,7 +45,7 @@
             {/foreach}
         </div>
 
-        <div style="text-align: center; margin-top: 2rem;">
+        <div class="posts-link-center">
             <a href="/posts" class="btn">Все статьи</a>
         </div>
     {else}
@@ -53,13 +55,13 @@
 
 {* Popular Posts Section *}
 {if count($popularPosts) > 0}
-    <section style="margin-top: 3rem; background-color: #fff8e1; padding: 2rem; border-radius: 0.5rem;">
+    <section class="popular-posts-section">
         <h2>🏆 Популярные статьи</h2>
-        <p style="color: #64748b; margin-bottom: 1.5rem;">Самые читаемые статьи на блоге</p>
+        <p class="popular-posts-intro">Самые читаемые статьи на блоге</p>
 
         <div class="posts-list">
             {foreach $popularPosts as $post}
-                <div class="post-card" style="border-left: 4px solid #f59e0b;">
+                <div class="post-card">
                     <h3>
                         <a href="/posts/{$post->slug}">{$post->title}</a>
                     </h3>
@@ -79,15 +81,15 @@
 {/if}
 
 {* Categories Section *}
-<section style="margin-top: 3rem;">
+<section class="categories-section">
     <h2>Категории</h2>
 
     {if count($categories) > 0}
         <div class="grid">
             {foreach $categories as $category}
-                <a href="/categories/{$category->slug}" class="category-card" style="text-decoration: none; color: inherit;">
+                <a href="/categories/{$category->slug}" class="category-card">
                     <h3>{$category->name}</h3>
-                    <p>{$category->description|default:'Статьи о ' . $category->name}</p>
+                    <p>{if $category->description}{$category->description}{else}Статьи о {$category->name}{/if}</p>
                 </a>
             {/foreach}
         </div>
@@ -97,8 +99,11 @@
 </section>
 
 {* Featured Section *}
-<section style="margin-top: 3rem; background-color: #f0f9ff; padding: 2rem; border-radius: 0.5rem;">
+<section class="featured-section">
     <h2>О проекте</h2>
     <p>Abelo — это современный блог о веб-разработке, где мы делимся практическими советами, туториалами и статьями о PHP, JavaScript, веб-дизайне и DevOps.</p>
     <p>Присоединяйтесь к нашему сообществу разработчиков и будьте в курсе последних тенденций в веб-индустрии!</p>
 </section>
+
+{/block}
+

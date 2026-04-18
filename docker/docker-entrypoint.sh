@@ -48,6 +48,19 @@ else
 fi
 
 echo ""
+
+# Node.js dependencies and SCSS build
+if [ ! -d "node_modules" ]; then
+    echo "📦 Installing Node.js dependencies..."
+    npm install
+else
+    echo "📦 Node.js dependencies already installed"
+fi
+
+echo "🎨 Building SCSS..."
+npm run build
+
+echo ""
 echo "✅ Application initialization complete!"
 echo ""
 

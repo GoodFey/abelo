@@ -1,8 +1,9 @@
 FROM php:8.4-fpm-alpine
 
-# Минимально необходимые системные пакеты
+# Системные пакеты + Node.js для сборщика
 RUN apk add --no-cache \
     curl \
+    wget \
     git \
     zip \
     unzip \
@@ -11,10 +12,19 @@ RUN apk add --no-cache \
     libxml2-dev \
     oniguruma-dev \
     linux-headers \
+    nodejs \
+    npm \
+    freetype-dev \
+    libjpeg-turbo-dev \
+    libpng-dev \
     $PHPIZE_DEPS
 
 # Установка необходимых PHP расширений
-RUN docker-php-ext-install -j$(nproc) \
+RUN docker-php-ext-configure gd \
+        --with-freetype \
+        --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
+    gd \
     mbstring \
     mysqli \
     pdo \

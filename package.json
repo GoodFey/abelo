@@ -1,0 +1,14 @@
+{
+  "name": "abelo-blog",
+  "version": "1.0.0",
+  "description": "PHP Blog with SCSS",
+  "private": true,
+  "scripts": {
+    "build": "sass resources/scss/main.scss public/css/main.css",
+    "watch": "sass --watch resources/scss:public/css"
+  },
+  "devDependencies": {
+    "sass": "^1.77.0"
+  }
+}
+
