@@ -84,7 +84,13 @@ class Database
                 $this->password,
                 $this->options
             );
+            Logger::getInstance()->info('Database connection established', [
+                'dsn' => $this->dsn,
+            ]);
         } catch (PDOException $e) {
+            Logger::getInstance()->critical('Database connection failed: ' . $e->getMessage(), [
+                'dsn' => $this->dsn,
+            ]);
             throw new PDOException('Database connection failed: ' . $e->getMessage());
         }
     }
@@ -110,6 +116,10 @@ class Database
                 return $stmt->execute($params);
             }
         } catch (PDOException $e) {
+            Logger::getInstance()->error('Query execution failed: ' . $query, [
+                'error' => $e->getMessage(),
+                'params' => $params,
+            ]);
             throw new PDOException('Query execution failed: ' . $e->getMessage());
         }
     }
@@ -130,9 +140,13 @@ class Database
             if (!$stmt->execute($params)) {
                 throw new PDOException('Query execution failed');
             }
+            Logger::getInstance()->query($query, $params);
             return $stmt;
         } catch (PDOException $e) {
-            error_log('Database Query Error: ' . $e->getMessage() . ' | Query: ' . $query);
+            Logger::getInstance()->error('Database Query Error: ' . $query, [
+                'error' => $e->getMessage(),
+                'params' => $params,
+            ]);
             throw new PDOException('Query execution failed: ' . $e->getMessage());
         }
     }

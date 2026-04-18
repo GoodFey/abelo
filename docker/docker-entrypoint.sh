@@ -3,6 +3,16 @@
 echo "🚀 Initializing Abelo application..."
 echo ""
 
+# Создание папки storage и logs
+echo "📁 Creating storage directories..."
+mkdir -p storage/logs
+mkdir -p storage/cache
+chmod -R 755 storage
+chmod -R 777 storage/logs
+chmod -R 777 storage/cache
+echo "✅ Storage directories created with correct permissions"
+echo ""
+
 # Проверка .env
 if [ ! -f ".env" ]; then
     echo "⚠️  .env file not found, creating from .env.example..."
