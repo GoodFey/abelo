@@ -1,3 +1,7 @@
+{extends "layout.tpl"}
+
+{block name="content"}
+
 {* Category Page Template *}
 
 {* Breadcrumb *}
@@ -66,3 +70,6 @@
         </ul>
     </div>
 </aside>
+
+{/block}
+

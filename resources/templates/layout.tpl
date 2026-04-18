@@ -29,8 +29,8 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Abelo. Все права защищены.</p>
-            <p>Блог о веб-разработке на PHP, JavaScript, DevOps</p>
+            <p>&copy; 2026 Abelo. Все права защищены.</p>
+            <p>Тестовое задание Ильи Евсегнеева для AbeloHost</p>
         </div>
     </footer>
 </body>

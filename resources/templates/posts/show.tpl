@@ -1,3 +1,7 @@
+{extends "layout.tpl"}
+
+{block name="content"}
+
 {* Single Post Page Template *}
 
 {* Breadcrumb *}
@@ -113,3 +117,6 @@
         </div>
     </section>
 {/if}
+
+{/block}
+

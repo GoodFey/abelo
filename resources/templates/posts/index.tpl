@@ -1,3 +1,7 @@
+{extends "layout.tpl"}
+
+{block name="content"}
+
 {* Posts Index Page *}
 
 {* Breadcrumb *}
@@ -96,3 +100,6 @@
         </p>
     </div>
 {/if}
+
+{/block}
+

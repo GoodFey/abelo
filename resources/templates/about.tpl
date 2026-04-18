@@ -1,3 +1,7 @@
+{extends "layout.tpl"}
+
+{block name="content"}
+
 {* About Page *}
 
 {* Breadcrumb *}
@@ -83,3 +87,6 @@
         <div class="label">Основных категорий</div>
     </div>
 </div>
+
+{/block}
+

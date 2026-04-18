@@ -1,3 +1,7 @@
+{extends "layout.tpl"}
+
+{block name="content"}
+
 {* Categories Index Page *}
 
 {* Breadcrumb *}
@@ -11,9 +15,9 @@
 {if count($categories) > 0}
     <div class="grid">
         {foreach $categories as $category}
-            <a href="/categories/{$category->slug}" class="category-card" style="text-decoration: none; color: inherit;">
+            <a href="/categories/{$category->slug}" class="category-card">
                 <h3>{$category->name}</h3>
-                <p>{$category->description|default:'Статьи о ' . $category->name}</p>
+                <p>{if $category->description}{$category->description}{else}Статьи о {$category->name}{/if}</p>
                 <div style="margin-top: 1rem; font-size: 0.875rem; color: #3b82f6;">
                     Перейти к статьям →
                 </div>
@@ -25,3 +29,6 @@
         <p>Категории не найдены.</p>
     </div>
 {/if}
+
+{/block}
+
