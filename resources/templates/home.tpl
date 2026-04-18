@@ -30,40 +30,46 @@
     {/if}
 </section>
 
-{* Latest Posts Section *}
+{* Latest Posts by Category Section *}
 <section>
-    <h2>Последние статьи</h2>
+    {foreach $postsByCategory as $data}
+        {if !empty($data.posts)}
+        <div class="category-posts-section">
+            <h2>
+                <a href="/categories/{$data.category->slug}">{$data.category->name}</a>
+            </h2>
 
-    {if count($posts) > 0}
-        <div class="posts-list">
-            {foreach $posts as $post}
-                <div class="post-card">
-                    <h3>
-                        <a href="/posts/{$post->slug}">{$post->title}</a>
-                    </h3>
+            <div class="posts-grid-horizontal">
+                {foreach $data.posts as $post}
+                    <div class="post-card-horizontal">
+                        <img src="/images/placeholder.png" alt="{$post->title}" />
 
-                    <div class="post-meta">
-                        <span>📅 {$post->published_at|date_format:'%d.%m.%Y'}</span>
-                        <span> | 👁️ {$post->views} просмотров</span>
+                        <h3>
+                            <a href="/posts/{$post->slug}">{$post->title}</a>
+                        </h3>
+
+                        <div class="post-meta">
+                            <span>📅 {$post->published_at|date_format:'%d.%m.%Y'}</span>
+                            <span> | 👁️ {$post->views}</span>
+                        </div>
+
+                        <p class="post-excerpt">{$post->excerpt|default:$post->content|substr:0:150}...</p>
+
+                        <a href="/posts/{$post->slug}" class="btn">Читать →</a>
                     </div>
+                {/foreach}
+            </div>
 
-                    <p class="post-excerpt">{$post->excerpt|default:$post->content|substr:0:150}...</p>
-
-                    <a href="/posts/{$post->slug}" class="btn">Читать далее →</a>
-                </div>
-            {/foreach}
+            <div class="category-link-center">
+                <a href="/categories/{$data.category->slug}" class="btn-secondary">Все статьи в категории →</a>
+            </div>
         </div>
-
-        <div class="posts-link-center">
-            <a href="/posts" class="btn">Все статьи</a>
-        </div>
-    {else}
-        <p>Пока нет опубликованных статей. Скоро здесь появится интересный контент!</p>
-    {/if}
+        {/if}
+    {/foreach}
 </section>
 
 {* Popular Posts Section *}
-{if count($popularPosts) > 0}
+{if !empty($popularPosts)}
     <section class="popular-posts-section">
         <h2>🏆 Популярные статьи</h2>
         <p class="popular-posts-intro">Самые читаемые статьи на блоге</p>

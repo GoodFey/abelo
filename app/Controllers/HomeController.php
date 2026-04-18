@@ -23,22 +23,29 @@ class HomeController extends Controller
         $postModel = new Post();
         $categoryModel = new Category();
 
-        // Get latest published posts
-        $latestPosts = $postModel->getPublished();
+        // Get categories that have posts
+        $categories = $categoryModel->getWithPosts();
 
-        // Get first 3 posts for homepage
-        $posts = array_slice($latestPosts, 0, 3);
+        // Get 3 latest posts for each category
+        $postsByCategory = [];
+        foreach ($categories as $category) {
+            $allPosts = $postModel->getByCategory($category->id);
+            // Filter published posts only
+            $published = array_filter($allPosts, fn($p) => $p->is_published);
+            // Get first 3
+            $postsByCategory[$category->id] = [
+                'category' => $category,
+                'posts' => array_slice($published, 0, 3)
+            ];
+        }
 
         // Get most viewed/popular posts
         $popularPosts = $postModel->getMostViewed(5);
 
-        // Get categories that have posts
-        $categories = $categoryModel->getWithPosts();
-
         return $this->render('home.tpl', [
             'title' => 'Abelo - Блог о веб-разработке',
             'description' => 'Статьи о PHP, JavaScript, веб-дизайне и DevOps',
-            'posts' => $posts,
+            'postsByCategory' => $postsByCategory,
             'popularPosts' => $popularPosts,
             'categories' => $categories,
         ]);

@@ -4,8 +4,10 @@
   "description": "PHP Blog with SCSS",
   "private": true,
   "scripts": {
-    "build": "sass resources/scss/main.scss public/css/main.css",
-    "watch": "sass --watch resources/scss:public/css"
+    "build": "npm run build:css && npm run copy:images",
+    "build:css": "sass resources/scss/main.scss public/css/main.css",
+    "copy:images": "mkdir -p public/images && cp -r resources/images/* public/images/",
+    "watch": "npm run watch:css"
   },
   "devDependencies": {
     "sass": "^1.77.0"
