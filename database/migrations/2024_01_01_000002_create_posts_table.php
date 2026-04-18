@@ -20,12 +20,12 @@ class CreatePostsTable
             slug VARCHAR(255) NOT NULL UNIQUE,
             content LONGTEXT NOT NULL,
             excerpt VARCHAR(500),
-            author_id INT,
+            image VARCHAR(255),
             is_published BOOLEAN DEFAULT FALSE,
+            views INT DEFAULT 0,
             published_at TIMESTAMP NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE SET NULL
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
 
         $db->execute($sql);

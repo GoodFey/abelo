@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Database\Seeders;
+namespace Database\Seeders;
 
 /**
  * PostSeeder
@@ -25,7 +25,6 @@ class PostSeeder extends Seeder
                 'slug' => 'introduction-to-php-8',
                 'content' => 'PHP 8 принес много новых возможностей и улучшений производительности. В этой статье мы рассмотрим основные нововведения.',
                 'excerpt' => 'Что нового в PHP 8?',
-                'author_id' => 1,
                 'is_published' => 1,
                 'views' => 45,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-30 days')),
@@ -37,7 +36,6 @@ class PostSeeder extends Seeder
                 'slug' => 'mysql-basics-for-beginners',
                 'content' => 'MySQL - это одна из самых популярных систем управления базами данных. Она используется в большинстве веб-приложений.',
                 'excerpt' => 'Учимся работать с MySQL',
-                'author_id' => 1,
                 'is_published' => 1,
                 'views' => 78,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-25 days')),
@@ -49,7 +47,6 @@ class PostSeeder extends Seeder
                 'slug' => 'javascript-for-web-developers',
                 'content' => 'JavaScript стал неотъемлемой частью современной веб-разработки. От фронтенда до бэкенда (Node.js).',
                 'excerpt' => 'Всё о JavaScript',
-                'author_id' => 1,
                 'is_published' => 1,
                 'views' => 92,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-20 days')),
@@ -61,7 +58,6 @@ class PostSeeder extends Seeder
                 'slug' => 'docker-containerization',
                 'content' => 'Docker позволяет упаковать приложение со всеми зависимостями в контейнер и запустить его где угодно.',
                 'excerpt' => 'Начинаем работать с Docker',
-                'author_id' => 1,
                 'is_published' => 1,
                 'views' => 56,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-15 days')),
@@ -73,7 +69,6 @@ class PostSeeder extends Seeder
                 'slug' => 'modern-web-design-2024',
                 'content' => 'Тренды в веб-дизайне постоянно меняются. Рассмотрим самые актуальные из них.',
                 'excerpt' => 'Что в моде в дизайне',
-                'author_id' => 1,
                 'is_published' => 1,
                 'views' => 34,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-10 days')),
@@ -85,7 +80,6 @@ class PostSeeder extends Seeder
                 'slug' => 'web-performance-optimization',
                 'content' => 'Быстрый веб-сайт - это лучший веб-сайт. Узнайте как оптимизировать скорость загрузки.',
                 'excerpt' => 'Делаем сайт быстрее',
-                'author_id' => 1,
                 'is_published' => 1,
                 'views' => 123,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-5 days')),
@@ -97,7 +91,6 @@ class PostSeeder extends Seeder
                 'slug' => 'api-design-best-practices',
                 'content' => 'Хороший API дизайн - это ключ к успеху вашего приложения. Рассмотрим основные принципы.',
                 'excerpt' => 'Учимся проектировать API',
-                'author_id' => 1,
                 'is_published' => 1,
                 'views' => 67,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-3 days')),
@@ -109,7 +102,6 @@ class PostSeeder extends Seeder
                 'slug' => 'future-of-web-development',
                 'content' => 'Эта статья в процессе написания. Скоро здесь будет интересный контент.',
                 'excerpt' => 'Что ждет веб-разработку?',
-                'author_id' => 1,
                 'is_published' => 0,
                 'views' => 0,
                 'published_at' => null,
@@ -165,3 +157,4 @@ class PostSeeder extends Seeder
         echo "✅ Attached categories to posts\n";
     }
 }
+

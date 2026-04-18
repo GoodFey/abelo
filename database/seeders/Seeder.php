@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Database\Seeders;
+namespace Database\Seeders;
 
 use App\Core\Database;
 
@@ -46,7 +46,9 @@ abstract class Seeder
     protected function truncate(string $table): void
     {
         try {
+            $this->db->execute("SET FOREIGN_KEY_CHECKS=0");
             $this->db->execute("TRUNCATE TABLE {$table}");
+            $this->db->execute("SET FOREIGN_KEY_CHECKS=1");
             echo "✅ Truncated {$table}\n";
         } catch (\Exception $e) {
             echo "❌ Error truncating {$table}: " . $e->getMessage() . "\n";
@@ -70,3 +72,4 @@ abstract class Seeder
         return $count;
     }
 }
+

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Database\Seeders;
+namespace Database\Seeders;
 
 /**
  * CategorySeeder
@@ -61,3 +61,4 @@ class CategorySeeder extends Seeder
         echo "✅ Created {$count} categories\n";
     }
 }
+
