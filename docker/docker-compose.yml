@@ -9,13 +9,13 @@ services:
     restart: unless-stopped
     working_dir: /var/www/html
     environment:
-      - APP_ENV=docker
-      - APP_DEBUG=true
-      - DB_HOST=mysql
-      - DB_PORT=3306
-      - DB_NAME=abelo
-      - DB_USER=abelo_user
-      - DB_PASSWORD=password
+      APP_ENV: docker
+      APP_DEBUG: true
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: abelo
+      DB_USER: abelo_user
+      DB_PASSWORD: password
     volumes:
       - ..:/var/www/html
     networks:

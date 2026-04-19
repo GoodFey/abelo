@@ -3,25 +3,20 @@
 echo "🚀 Initializing Abelo application..."
 echo ""
 
-# Создание папки storage и logs
-echo "📁 Creating storage directories..."
-mkdir -p storage/logs
-mkdir -p storage/cache
-chmod -R 755 storage
-chmod -R 777 storage/logs
-chmod -R 777 storage/cache
-echo "✅ Storage directories created with correct permissions"
+# Директории
+echo "📁 Preparing directories..."
+mkdir -p storage/logs storage/cache public/cache/images
 
-# Создание папки для кэша картинок (должна быть в public/)
-echo "📁 Creating public cache directory for images..."
-mkdir -p public/cache/images
-chmod -R 777 public/cache
-echo "✅ Public cache directory created with correct permissions"
+chown -R www-data:www-data storage public/cache
+chmod -R 775 storage public/cache
+
+echo "✅ Directories ready"
 echo ""
 
-# Проверка .env
+# .env
 if [ ! -f ".env" ]; then
-    echo "⚠️  .env file not found, creating from .env.example..."
+    echo "⚠️ .env not found, creating..."
+
     if [ -f ".env.example" ]; then
         cp .env.example .env
     else
@@ -37,10 +32,12 @@ DB_USER=abelo_user
 DB_PASSWORD=password
 EOF
     fi
-    echo "✅ .env file created"
+
+    echo "✅ .env created"
 else
-    echo "✅ .env file exists"
+    echo "✅ .env exists"
 fi
+
 echo ""
 
 git config --global --add safe.directory /var/www/html
@@ -55,21 +52,23 @@ fi
 
 echo ""
 
-# Node.js dependencies and SCSS build
+# Node
 if [ ! -d "node_modules" ]; then
-    echo "📦 Installing Node.js dependencies..."
+    echo "📦 Installing Node dependencies..."
     npm install
 else
-    echo "📦 Node.js dependencies already installed"
+    echo "📦 Node dependencies already installed"
 fi
 
-echo "🎨 Building SCSS..."
+echo "🎨 Building assets..."
 npm run build
 
 echo ""
+
 echo "✅ Application initialization complete!"
 echo ""
+echo "🌐 http://localhost:8000"
+echo ""
 
-# Запуск PHP-FPM
+# запуск PHP-FPM (ОБЯЗАТЕЛЬНО последняя строка)
 exec php-fpm
-

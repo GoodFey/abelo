@@ -1,9 +1,8 @@
 FROM php:8.4-fpm-alpine
 
-# Системные пакеты + Node.js для сборщика
+# Пакеты
 RUN apk add --no-cache \
     curl \
-    wget \
     git \
     zip \
     unzip \
@@ -19,30 +18,29 @@ RUN apk add --no-cache \
     libpng-dev \
     $PHPIZE_DEPS
 
-# Установка необходимых PHP расширений
+# PHP расширения
 RUN docker-php-ext-configure gd \
         --with-freetype \
         --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
-    gd \
-    mbstring \
-    mysqli \
-    pdo \
-    pdo_mysql \
-    zip \
-    opcache
+        gd \
+        mbstring \
+        mysqli \
+        pdo \
+        pdo_mysql \
+        zip \
+        opcache
 
-# Установить Composer
+# Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Установить рабочую директорию
 WORKDIR /var/www/html
 
-# Копировать entrypoint скрипт
-COPY docker-entrypoint.sh /usr/local/bin/
+# EntryPoint
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Пользователь www-data
+# Права
 RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 9000
