@@ -11,7 +11,6 @@ use App\Core\Router;
 return function (Router $router) {
     // Home routes
     $router->get('/', 'HomeController@index');
-    $router->get('/about', 'HomeController@about');
 
     // Post routes
     $router->get('/posts', 'PostController@index');

@@ -270,7 +270,7 @@ class PostSeeder extends Seeder
 
 Свяжитесь со мной в Telegram: [@evs_ilya](https://t.me/evs_ilya)',
                 'excerpt' => 'Знакомьтесь - Илья, Backend-разработчик с опытом 3+',
-                'image_path' => $this->getRandomImage(),
+                'image_path' => 'images/doge1.png',
                 'is_published' => 1,
                 'views' => 45,
                 'published_at' => date('Y-m-d H:i:s'),
@@ -354,7 +354,7 @@ class PostSeeder extends Seeder
 
 > И естественно не забываем про тесты',
                 'excerpt' => 'Нейросети как инструмент, а не замена разработчику',
-                'image_path' => $this->getRandomImage(),
+                'image_path' => 'images/doge1.png',
                 'is_published' => 1,
                 'views' => 38,
                 'published_at' => date('Y-m-d H:i:s'),
@@ -442,7 +442,7 @@ class PostSeeder extends Seeder
     - загрузка роутов
     - dispatch запроса',
                 'excerpt' => 'Как спланировать и реализовать Laravel-подобный фреймворк',
-                'image_path' => $this->getRandomImage(),
+                'image_path' => 'images/doge1.png',
                 'is_published' => 1,
                 'views' => 52,
                 'published_at' => date('Y-m-d H:i:s'),

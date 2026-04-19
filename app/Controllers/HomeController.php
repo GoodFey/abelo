@@ -42,23 +42,26 @@ class HomeController extends Controller
         // Get most viewed/popular posts
         $popularPosts = $postModel->getMostViewed(5);
 
+        // Get featured posts from "About Project" category
+        $aboutProjectPosts = [];
+        foreach ($categories as $category) {
+            if ($category->slug === 'about-project') {
+                $allPosts = $postModel->getByCategory($category->id);
+                // Filter published posts only
+                $published = array_filter($allPosts, fn($p) => $p->is_published);
+                // Get first 3
+                $aboutProjectPosts = array_slice($published, 0, 3);
+                break;
+            }
+        }
+
         return $this->render('home.tpl', [
             'title' => 'Abelo - Блог о веб-разработке',
             'description' => 'Статьи о PHP, JavaScript, веб-дизайне и DevOps',
             'postsByCategory' => $postsByCategory,
             'popularPosts' => $popularPosts,
             'categories' => $categories,
-        ]);
-    }
-
-    /**
-     * Display about page
-     */
-    public function about(Request $request, Response $response, array $params = []): string
-    {
-        return $this->render('about.tpl', [
-            'title' => 'О блоге',
-            'description' => 'Информация о проекте Abelo'
+            'aboutProjectPosts' => $aboutProjectPosts,
         ]);
     }
 }

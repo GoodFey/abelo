@@ -6,6 +6,9 @@
     <meta name="description" content="{$description|default:'Abelo - Блог о веб-разработке'}">
     <title>{$title|default:'Abelo'} - Блог</title>
 
+    {* Favicon with rocket emoji *}
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='90'>🚀</text></svg>">
+
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
@@ -18,7 +21,6 @@
                 <li><a href="/">Главная</a></li>
                 <li><a href="/posts">Статьи</a></li>
                 <li><a href="/categories">Категории</a></li>
-                <li><a href="/about">О блоге</a></li>
             </ul>
         </nav>
     </header>

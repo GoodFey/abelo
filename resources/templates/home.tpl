@@ -4,12 +4,34 @@
 
 <h1>Добро пожаловать в Abelo</h1>
 
-{* Featured Section *}
-<section class="featured-section">
-    <h2>О проекте</h2>
-    <p>Abelo — это современный блог о веб-разработке, где мы делимся практическими советами, туториалами и статьями о PHP, JavaScript, веб-дизайне и DevOps.</p>
-    <p>Присоединяйтесь к нашему сообществу разработчиков и будьте в курсе последних тенденций в веб-индустрии!</p>
-</section>
+{* Featured Section - About Project Posts *}
+{if !empty($aboutProjectPosts)}
+    <section class="category-posts-section featured-posts-section">
+        <h2>⭐ О проекте</h2>
+        <p class="featured-posts-intro">Познакомьтесь с автором и философией разработки</p>
+
+        <div class="posts-grid-horizontal">
+            {foreach $aboutProjectPosts as $post}
+                <div class="post-card-horizontal">
+                    <img src="/{if $post->image_path}{$post->image_path|thumb:600:338}{else}images/placeholder.png{/if}" alt="{$post->title}" />
+
+                    <h3>
+                        <a href="/posts/{$post->slug}">{$post->title}</a>
+                    </h3>
+
+                    <div class="post-meta">
+                        <span>📅 {$post->published_at|date_format:'%d.%m.%Y'}</span>
+                        <span> | 👁️ {$post->views}</span>
+                    </div>
+
+                    <p class="post-excerpt">{$post->excerpt|default:$post->content|substr:0:150}...</p>
+
+                    <a href="/posts/{$post->slug}" class="btn">Читать →</a>
+                </div>
+            {/foreach}
+        </div>
+    </section>
+{/if}
 
 {* Categories Section *}
 <section class="categories-section">
@@ -17,12 +39,27 @@
 
     {if !empty($categories)}
         <div class="grid">
+            {* Featured category first *}
             {foreach $categories as $category}
-                <a href="/categories/{$category->slug}" class="category-card">
-                    <h3>{$category->name}</h3>
-                    <p>{if $category->description}{$category->description}{else}Статьи о {$category->name}{/if}</p>
-                    <div class="category-count">{$category->posts_count} {if $category->posts_count == 1}статья{elseif $category->posts_count % 10 < 5 && $category->posts_count % 10 != 0}статьи{else}статей{/if}</div>
-                </a>
+                {if $category->slug === 'about-project'}
+                    <a href="/categories/{$category->slug}" class="category-card featured-category">
+                        <div class="featured-badge">⭐ ВАЖНО</div>
+                        <h3>{$category->name}</h3>
+                        <p>{if $category->description}{$category->description}{else}Статьи о {$category->name}{/if}</p>
+                        <div class="category-count">{$category->posts_count} {if $category->posts_count == 1}статья{elseif $category->posts_count % 10 < 5 && $category->posts_count % 10 != 0}статьи{else}статей{/if}</div>
+                    </a>
+                {/if}
+            {/foreach}
+
+            {* Other categories *}
+            {foreach $categories as $category}
+                {if $category->slug !== 'about-project'}
+                    <a href="/categories/{$category->slug}" class="category-card">
+                        <h3>{$category->name}</h3>
+                        <p>{if $category->description}{$category->description}{else}Статьи о {$category->name}{/if}</p>
+                        <div class="category-count">{$category->posts_count} {if $category->posts_count == 1}статья{elseif $category->posts_count % 10 < 5 && $category->posts_count % 10 != 0}статьи{else}статей{/if}</div>
+                    </a>
+                {/if}
             {/foreach}
         </div>
     {else}
