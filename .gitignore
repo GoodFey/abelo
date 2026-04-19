@@ -2,6 +2,10 @@
 vendor/
 composer.lock
 
+# Node.js
+node_modules/
+package-lock.json
+
 # IDE
 .idea/
 .vscode/
@@ -14,6 +18,10 @@ composer.lock
 # Environment
 .env
 .env.*.local
+
+# Storage and Logs
+storage/logs/
+storage/cache/
 
 # OS
 Thumbs.db
@@ -46,3 +54,6 @@ database/*.db
 # Tests
 tests/coverage/
 .phpunit.result.cache
+
+/public/css
+public/images

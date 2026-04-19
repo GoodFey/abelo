@@ -42,7 +42,7 @@
             <div class="posts-grid-horizontal">
                 {foreach $data.posts as $post}
                     <div class="post-card-horizontal">
-                        <img src="/images/placeholder.png" alt="{$post->title}" />
+                        <img src="/{if $post->image_path}{$post->image_path}{else}images/placeholder.png{/if}" alt="{$post->title}" />
 
                         <h3>
                             <a href="/posts/{$post->slug}">{$post->title}</a>
@@ -74,9 +74,11 @@
         <h2>🏆 Популярные статьи</h2>
         <p class="popular-posts-intro">Самые читаемые статьи на блоге</p>
 
-        <div class="posts-list">
+        <div class="posts-grid-horizontal">
             {foreach $popularPosts as $post}
-                <div class="post-card">
+                <div class="post-card-horizontal">
+                    <img src="/{if $post->image_path}{$post->image_path}{else}images/placeholder.png{/if}" alt="{$post->title}" />
+
                     <h3>
                         <a href="/posts/{$post->slug}">{$post->title}</a>
                     </h3>
@@ -88,9 +90,13 @@
 
                     <p class="post-excerpt">{$post->excerpt|default:$post->content|substr:0:150}...</p>
 
-                    <a href="/posts/{$post->slug}" class="btn">Читать далее →</a>
+                    <a href="/posts/{$post->slug}" class="btn">Читать →</a>
                 </div>
             {/foreach}
+        </div>
+
+        <div class="category-link-center">
+            <a href="/posts" class="btn-secondary">Все статьи →</a>
         </div>
     </section>
 {/if}

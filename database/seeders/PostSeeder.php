@@ -25,6 +25,7 @@ class PostSeeder extends Seeder
                 'slug' => 'introduction-to-php-8',
                 'content' => 'PHP 8 принес много новых возможностей и улучшений производительности. В этой статье мы рассмотрим основные нововведения.',
                 'excerpt' => 'Что нового в PHP 8?',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 45,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-30 days')),
@@ -36,6 +37,7 @@ class PostSeeder extends Seeder
                 'slug' => 'mysql-basics-for-beginners',
                 'content' => 'MySQL - это одна из самых популярных систем управления базами данных. Она используется в большинстве веб-приложений.',
                 'excerpt' => 'Учимся работать с MySQL',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 78,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-25 days')),
@@ -47,6 +49,7 @@ class PostSeeder extends Seeder
                 'slug' => 'javascript-for-web-developers',
                 'content' => 'JavaScript стал неотъемлемой частью современной веб-разработки. От фронтенда до бэкенда (Node.js).',
                 'excerpt' => 'Всё о JavaScript',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 92,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-20 days')),
@@ -58,6 +61,7 @@ class PostSeeder extends Seeder
                 'slug' => 'docker-containerization',
                 'content' => 'Docker позволяет упаковать приложение со всеми зависимостями в контейнер и запустить его где угодно.',
                 'excerpt' => 'Начинаем работать с Docker',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 56,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-15 days')),
@@ -69,6 +73,7 @@ class PostSeeder extends Seeder
                 'slug' => 'modern-web-design-2024',
                 'content' => 'Тренды в веб-дизайне постоянно меняются. Рассмотрим самые актуальные из них.',
                 'excerpt' => 'Что в моде в дизайне',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 34,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-10 days')),
@@ -80,6 +85,7 @@ class PostSeeder extends Seeder
                 'slug' => 'web-performance-optimization',
                 'content' => 'Быстрый веб-сайт - это лучший веб-сайт. Узнайте как оптимизировать скорость загрузки.',
                 'excerpt' => 'Делаем сайт быстрее',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 123,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-5 days')),
@@ -91,6 +97,7 @@ class PostSeeder extends Seeder
                 'slug' => 'api-design-best-practices',
                 'content' => 'Хороший API дизайн - это ключ к успеху вашего приложения. Рассмотрим основные принципы.',
                 'excerpt' => 'Учимся проектировать API',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 67,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-3 days')),
@@ -102,6 +109,7 @@ class PostSeeder extends Seeder
                 'slug' => 'future-of-web-development',
                 'content' => 'Эта статья в процессе написания. Скоро здесь будет интересный контент.',
                 'excerpt' => 'Что ждет веб-разработку?',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 0,
                 'views' => 0,
                 'published_at' => null,
@@ -113,6 +121,7 @@ class PostSeeder extends Seeder
                 'slug' => 'solid-principles',
                 'content' => 'SOLID — это не страшная аббревиатура, а набор простых правил, которые делают код поддерживаемым. Если коротко: каждый класс должен делать одну вещь, зависимости должны быть гибкими, а код — расширяемым без переписывания. В реальных проектах это спасает от ситуации, когда любое изменение ломает половину системы.',
                 'excerpt' => 'Пишем код, который не стыдно поддерживать',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 77,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-12 days')),
@@ -124,6 +133,7 @@ class PostSeeder extends Seeder
                 'slug' => 'rest-api-practice',
                 'content' => 'REST — это не просто набор правил, а подход к проектированию API. Правильные URL, HTTP методы и статусы позволяют сделать API понятным без документации. Если ты видишь /users/1 — ты уже примерно понимаешь, что произойдет.',
                 'excerpt' => 'REST без лишней теории',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 83,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-11 days')),
@@ -135,6 +145,7 @@ class PostSeeder extends Seeder
                 'slug' => 'separation-of-concerns',
                 'content' => 'Когда логика, база данных и отображение смешаны — проект быстро превращается в хаос. Разделение на слои (Controller, Model, View) позволяет изолировать изменения и упрощает поддержку. Это особенно заметно, когда проект начинает расти.',
                 'excerpt' => 'Как не превратить проект в спагетти',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 69,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-9 days')),
@@ -146,6 +157,7 @@ class PostSeeder extends Seeder
                 'slug' => 'pagination-best-practice',
                 'content' => 'Пагинация — это не просто LIMIT и OFFSET. Важно учитывать производительность, UX и корректность работы на больших объемах данных. Иногда лучше использовать курсоры вместо offset, чтобы избежать проблем с производительностью.',
                 'excerpt' => 'Делаем списки удобными',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 58,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-8 days')),
@@ -157,6 +169,7 @@ class PostSeeder extends Seeder
                 'slug' => 'form-validation',
                 'content' => 'Любые данные от пользователя — потенциальная проблема. Валидация на сервере обязательна, даже если есть проверка на клиенте. Это защищает от ошибок и атак.',
                 'excerpt' => 'Не доверяй пользователю',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 74,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-7 days')),
@@ -168,6 +181,7 @@ class PostSeeder extends Seeder
                 'slug' => 'how-http-works',
                 'content' => 'HTTP — это основа веба. Запрос, ответ, заголовки, статусы — всё это важно понимать, чтобы писать корректные приложения. Без этого сложно нормально работать с API и браузером.',
                 'excerpt' => 'База веба',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 81,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-6 days')),
@@ -179,6 +193,7 @@ class PostSeeder extends Seeder
                 'slug' => 'sql-injection',
                 'content' => 'SQL-инъекция — одна из самых распространенных уязвимостей. Решение простое: использовать prepared statements. Но на практике многие до сих пор делают конкатенацию строк.',
                 'excerpt' => 'Безопасность 101',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 99,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-5 days')),
@@ -190,6 +205,7 @@ class PostSeeder extends Seeder
                 'slug' => 'application-logging',
                 'content' => 'Без логов ты слепой. Ошибки, действия пользователей, системные события — всё это нужно записывать. Даже простой файл логов уже сильно помогает в отладке.',
                 'excerpt' => 'Видеть, что происходит',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 52,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-4 days')),
@@ -201,6 +217,7 @@ class PostSeeder extends Seeder
                 'slug' => 'clean-code',
                 'content' => 'Код читается чаще, чем пишется. Понятные имена, простые функции и отсутствие лишней магии — это то, что отличает хороший код от плохого.',
                 'excerpt' => 'Код для людей',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 88,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-3 days')),
@@ -212,6 +229,7 @@ class PostSeeder extends Seeder
                 'slug' => 'junior-mistakes',
                 'content' => 'Самые частые ошибки — это копирование кода без понимания, отсутствие структуры и игнорирование архитектуры. Это нормально, через это проходят все. Важно — быстро это осознать.',
                 'excerpt' => 'Учимся на чужих ошибках',
+                'image_path' => $this->getRandomImage(),
                 'is_published' => 1,
                 'views' => 120,
                 'published_at' => date('Y-m-d H:i:s', strtotime('-2 days')),
@@ -293,6 +311,31 @@ class PostSeeder extends Seeder
         }
 
         echo "✅ Attached categories to posts\n";
+    }
+
+    /**
+     * Get a random image path or null
+     * Randomly assigns images to posts, some posts stay without images (null)
+     */
+    private function getRandomImage(): ?string
+    {
+        // Available images in public/images/
+        $images = [
+            'images/1.jpg',
+            'images/2.jpg',
+            'images/3.jpg',
+            'images/4.jpg',
+            'images/5.jpg',
+            'images/6.jpg',
+            'images/7.jpg',
+        ];
+
+        // 60% chance to get an image, 40% chance to return null
+        if (rand(1, 100) <= 60) {
+            return $images[array_rand($images)];
+        }
+
+        return null;
     }
 }
 

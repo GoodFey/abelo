@@ -17,12 +17,12 @@ class Post extends Model
     public string $slug;
     public string $content;
     public ?string $excerpt = null;
+    public ?string $image_path = null;
     public ?int $author_id = null;
     public bool $is_published = false;
     public int $views = 0;
     public ?string $published_at = null;
     public ?string $created_at = null;
-    public ?string $updated_at = null;
 
     /**
      * Get all posts
@@ -186,6 +186,7 @@ class Post extends Model
                 'slug' => $this->slug,
                 'content' => $this->content,
                 'excerpt' => $this->excerpt,
+                'image_path' => $this->image_path,
                 'author_id' => $this->author_id,
                 'is_published' => $this->is_published ? 1 : 0,
                 'published_at' => $this->published_at,
@@ -198,6 +199,7 @@ class Post extends Model
                 'slug' => $this->slug,
                 'content' => $this->content,
                 'excerpt' => $this->excerpt,
+                'image_path' => $this->image_path,
                 'author_id' => $this->author_id,
                 'is_published' => $this->is_published ? 1 : 0,
                 'published_at' => $this->published_at,

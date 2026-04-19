@@ -20,7 +20,7 @@ class CreatePostsTable
             slug VARCHAR(255) NOT NULL UNIQUE,
             content LONGTEXT NOT NULL,
             excerpt VARCHAR(500),
-            image VARCHAR(255),
+            image_path VARCHAR(255),
             is_published BOOLEAN DEFAULT FALSE,
             views INT DEFAULT 0,
             published_at TIMESTAMP NULL,
