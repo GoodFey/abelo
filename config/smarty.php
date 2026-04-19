@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Core\ImageCache;
+use Parsedown;
 
 /**
  * Smarty Template Engine Configuration
@@ -37,6 +38,15 @@ return function(): Smarty {
             return '';
         }
         return $imageCache->get($path, $width, $height);
+    });
+
+    // Register markdown filter
+    $parsedown = new Parsedown();
+    $smarty->registerPlugin('modifier', 'markdown', function(string $text) use ($parsedown): string {
+        if (empty($text)) {
+            return '';
+        }
+        return $parsedown->text($text);
     });
 
     return $smarty;

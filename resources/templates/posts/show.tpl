@@ -38,7 +38,7 @@
 
     {* Post Content *}
     <div class="content-body">
-        {$post->content}
+        {$post->content|markdown}
     </div>
 </article>
 

@@ -54,6 +54,13 @@ class CategorySeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
+            [
+                'name' => 'О проекте',
+                'slug' => 'about-project',
+                'description' => 'Информация об авторе и проекте',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
         ];
 
         // Insert categories
