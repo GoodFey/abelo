@@ -4,9 +4,10 @@
   "description": "PHP Blog with SCSS",
   "private": true,
   "scripts": {
-    "build": "npm run build:css && npm run copy:images",
+    "build": "npm run build:css && npm run copy:images && npm run clean:cache",
     "build:css": "sass resources/scss/main.scss public/css/main.css",
-    "copy:images": "mkdir -p public/images && cp -r resources/images/* public/images/",
+    "copy:images": "rm -rf public/images && mkdir -p public/images && cp -r resources/images/* public/images/",
+    "clean:cache": "rm -rf public/cache/images/* storage/cache/smarty_compile/*",
     "watch": "npm run watch:css"
   },
   "devDependencies": {

@@ -57,3 +57,4 @@ tests/coverage/
 
 /public/css
 public/images
+public/cache/images

@@ -26,7 +26,7 @@
 
                     {* Image on the left *}
                     <div class="category-post-image">
-                        <img src="/{if $post->image_path}{$post->image_path}{else}images/placeholder.png{/if}" alt="{$post->title}" />
+                        <img src="/{if $post->image_path}{$post->image_path|thumb:600:338}{else}images/placeholder.png{/if}" alt="{$post->title}" />
                     </div>
 
                     {* Content on the right *}

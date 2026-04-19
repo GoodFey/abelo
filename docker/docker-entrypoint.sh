@@ -11,6 +11,12 @@ chmod -R 755 storage
 chmod -R 777 storage/logs
 chmod -R 777 storage/cache
 echo "✅ Storage directories created with correct permissions"
+
+# Создание папки для кэша картинок (должна быть в public/)
+echo "📁 Creating public cache directory for images..."
+mkdir -p public/cache/images
+chmod -R 777 public/cache
+echo "✅ Public cache directory created with correct permissions"
 echo ""
 
 # Проверка .env

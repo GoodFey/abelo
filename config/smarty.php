@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Core\ImageCache;
+
 /**
  * Smarty Template Engine Configuration
  */
@@ -23,6 +25,19 @@ return function(): Smarty {
         $smarty->setForceCompile(false);
         $smarty->setCaching(Smarty::CACHING_LIFETIME_SAVED);
     }
+
+    // Register image thumbnail filter
+    $imageCache = new ImageCache();
+    $smarty->registerPlugin('modifier', 'thumb', function(
+        string $path,
+        int $width = 300,
+        int $height = 200
+    ) use ($imageCache): string {
+        if (empty($path)) {
+            return '';
+        }
+        return $imageCache->get($path, $width, $height);
+    });
 
     return $smarty;
 };

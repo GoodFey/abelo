@@ -42,7 +42,7 @@
             <div class="posts-grid-horizontal">
                 {foreach $data.posts as $post}
                     <div class="post-card-horizontal">
-                        <img src="/{if $post->image_path}{$post->image_path}{else}images/placeholder.png{/if}" alt="{$post->title}" />
+                        <img src="/{if $post->image_path}{$post->image_path|thumb:600:338}{else}images/placeholder.png{/if}" alt="{$post->title}" />
 
                         <h3>
                             <a href="/posts/{$post->slug}">{$post->title}</a>
@@ -77,7 +77,7 @@
         <div class="posts-grid-horizontal">
             {foreach $popularPosts as $post}
                 <div class="post-card-horizontal">
-                    <img src="/{if $post->image_path}{$post->image_path}{else}images/placeholder.png{/if}" alt="{$post->title}" />
+                    <img src="/{if $post->image_path}{$post->image_path|thumb:600:338}{else}images/placeholder.png{/if}" alt="{$post->title}" />
 
                     <h3>
                         <a href="/posts/{$post->slug}">{$post->title}</a>
